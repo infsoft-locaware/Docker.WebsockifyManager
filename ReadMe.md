@@ -53,7 +53,7 @@ When running the container manually you have the following options:
 
 ##### Environment variables
 | Env Var | Required | Default Value | Description |
-| -- | -- | -- |
+| -- | -- | -- | -- |
 | CONFIG_RELOAD_INTERVALL | false | 3600 | Interval in which the config is queried and refreshed at (in seconds) |
 | CONFIG_API_KEY | true | | ApiKey required to call the api |
 | CONFIG_API_URL | true | | Url to query in order to fetch configuration |
