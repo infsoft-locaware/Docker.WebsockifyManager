@@ -27,7 +27,7 @@ To run the service, simply create the following docker-compose, create a corresp
 ```yaml
 services:
   websockifyManager:
-    image: ghcr.io/infsoft-locaware/Docker.WebsockifyManager
+    image: ghcr.io/infsoft-locaware/docker.websockifymanager
     environment:
       - CONFIG_RELOAD_INTERVALL // only if you wish to differ from the default 3600
       - CONFIG_API_URL
