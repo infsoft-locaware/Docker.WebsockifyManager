@@ -1,0 +1,22 @@
+services:
+  websockifyManager:
+    environment:
+      - CONFIG_RELOAD_INTERVALL
+      - CONFIG_API_URL
+      - CONFIG_API_KEY
+    ports:
+      - 443:443
+    build:
+      context: .
+      dockerfile: Docker.WebsockifyManager/Dockerfile
+    volumes:
+      - ./self.pem:/ssl/cert.pem:ro
+      - ./self.key:/ssl/cert.key:ro
+      
+  vnc:
+    container_name: vnc
+    image: consol/rocky-xfce-vnc:latest
+    environment:
+      VNC_PORT: 5901
+      VNC_PW: vncpassword 
+ 
