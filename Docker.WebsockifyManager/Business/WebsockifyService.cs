@@ -26,6 +26,7 @@ namespace Infsoft.Docker.WebsockifyManager.Business
         {
             process.Exited -= LogCrash;
             process.Kill(true);
+            process.Dispose();
             Logger.LogInformation("Stopped websockify for {Id}", id);
         }
 
@@ -36,7 +37,7 @@ namespace Infsoft.Docker.WebsockifyManager.Business
                 UseShellExecute = true,
                 CreateNoWindow = true
             };
-            using var process = new Process() { StartInfo = processInfo };
+            var process = new Process() { StartInfo = processInfo };
             process.Start();
             process.Exited += LogCrash;
             if (process.HasExited)

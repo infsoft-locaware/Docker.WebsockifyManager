@@ -36,7 +36,7 @@ namespace Infsoft.Docker.WebsockifyManager.Business
                 DeleteWebsockifyInstance(instance);
 
             Logger.LogInformation("Deleted {Count} configurations", toDelete.Count);
-            var creationTasks = new List<Task>();
+            var updated = 0;
             foreach (var config in configs)
             {
                 if (!Cache.GetPort(config.Id, out var port))
@@ -53,14 +53,14 @@ namespace Infsoft.Docker.WebsockifyManager.Business
 
                 if (exists || CreateWebsockifyInstance(config, port.Value))
                 {
+                    if (!exists) updated++;
                     routes.Add(CreateRoute(config));
                     clusters.Add(CreateCluster(config, port.Value));
                 }
                 else
                     Logger.LogWarning("Could not create websockify instance for config {Id}", config.Id);
             }
-            await Task.WhenAll(creationTasks);
-            Logger.LogInformation("Updated {Count} of {Total} configurations", creationTasks.Count, routes.Count);
+            Logger.LogInformation("Updated {Count} of {Total} configurations", updated, routes.Count);
             ProxyConfigProvider.Update(routes, clusters);
         }
 
