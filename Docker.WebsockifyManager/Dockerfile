@@ -12,9 +12,10 @@ EXPOSE 443
 # This stage is used to build the service project
 FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build
 WORKDIR /src
+ARG BUILD_CONFIGURATION=Release
 
 COPY ["Docker.WebsockifyManager/Docker.WebsockifyManager.csproj", "Docker.WebsockifyManager/"]
-RUN dotnet restore "./Docker.WebsockifyManager.csproj"
+RUN dotnet restore "./Docker.WebsockifyManager/Docker.WebsockifyManager.csproj"
 COPY . .
 WORKDIR "/src/Docker.WebsockifyManager"
 RUN dotnet build "./Docker.WebsockifyManager.csproj" -c $BUILD_CONFIGURATION -o /app/build
