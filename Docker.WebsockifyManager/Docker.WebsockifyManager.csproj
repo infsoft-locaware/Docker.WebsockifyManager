@@ -8,7 +8,7 @@
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
     <RootNamespace>Infsoft.Docker.WebsockifyManager</RootNamespace>
     <AssemblyName>Infsoft.Docker.WebsockifyManager</AssemblyName>
-    <Version>1.0.1</Version>
+    <Version>1.0.2</Version>
   </PropertyGroup>
 
   <ItemGroup>

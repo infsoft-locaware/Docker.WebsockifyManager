@@ -29,4 +29,4 @@ RUN dotnet publish "./Docker.WebsockifyManager.csproj" -c $BUILD_CONFIGURATION -
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "Docker.WebsockifyManager.dll"]
+ENTRYPOINT ["dotnet", "Infsoft.Docker.WebsockifyManager.dll"]
