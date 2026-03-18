@@ -21,7 +21,9 @@ The queried API must return the following data format (json):
 All properties are optional, but only entries with both `uid` and `websockifyHost` as well as `websockifyPort` > 0 will be used.
 
 ## Running the service
-To run the service, simply create the following docker-compose, create a corresponding .env file.
+To run the service, create the following docker-compose and create a corresponding .env file.
+
+The service must be run behind a reverse proxy handling TLS termination.
 
 #### Compose
 ```yaml
@@ -33,10 +35,7 @@ services:
       - CONFIG_API_URL
       - CONFIG_API_KEY
     ports:
-      - 443:443
-    volumes:
-      - ./nginx/self.pem:/ssl/cert.pem:ro
-      - ./nginx/self.key:/ssl/cert.key:ro
+      - "80:80"
 
 ```
 
@@ -49,7 +48,7 @@ CONFIG_API_KEY=<YourApiKey>
 
 ### Further information
 #### Container configuration
-When running the container manually you have the following options:
+When running the container manually, you have the following options:
 
 ##### Environment variables
 | Env Var | Required | Default Value | Description |
@@ -58,5 +57,3 @@ When running the container manually you have the following options:
 | CONFIG_API_KEY | true | | ApiKey required to call the api |
 | CONFIG_API_URL | true | | Url to query in order to fetch configuration |
 
-##### Mounts
-Mount a SSL certificate (named cert.pem and cert.key) in the following path: `/ssl/cert.pem` and `/ssl/cert.key`

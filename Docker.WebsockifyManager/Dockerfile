@@ -1,5 +1,5 @@
 # This stage is used when running from VS in fast mode (Default for Debug configuration)
-FROM mcr.microsoft.com/dotnet/aspnet:9.0 AS base
+FROM mcr.microsoft.com/dotnet/aspnet:10.0 AS base
 RUN apt-get update && apt-get install -y --no-install-recommends python3-pip python-is-python3 git && rm -rf /var/lib/apt/lists/* 
 RUN git clone https://github.com/novnc/websockify.git /websockify
 WORKDIR /websockify
@@ -7,10 +7,10 @@ RUN python setup.py install
 
 USER $APP_UID
 WORKDIR /app
-EXPOSE 443
+EXPOSE 8080
 
 # This stage is used to build the service project
-FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build
+FROM mcr.microsoft.com/dotnet/sdk:10.0 AS build
 WORKDIR /src
 ARG BUILD_CONFIGURATION=Release
 
