@@ -35,7 +35,7 @@ services:
       - CONFIG_API_URL
       - CONFIG_API_KEY
     ports:
-      - "80:80"
+      - "8080:8080"
 
 ```
 
